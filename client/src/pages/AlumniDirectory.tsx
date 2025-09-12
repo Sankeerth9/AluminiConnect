@@ -177,8 +177,8 @@ export default function AlumniDirectory() {
             Clear Search
           </Button>
         </div>
-        )}
-      </div>
+      )}
+    </div>
     </div>
   );
 }

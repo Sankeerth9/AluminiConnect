@@ -43,7 +43,15 @@ export class MemStorage implements IStorage {
 
   async createAlumni(insertAlumni: InsertAlumni): Promise<Alumni> {
     const id = randomUUID();
-    const alumni: Alumni = { ...insertAlumni, id };
+    const alumni: Alumni = { 
+      id,
+      name: insertAlumni.name,
+      graduationYear: insertAlumni.graduationYear,
+      company: insertAlumni.company ?? null,
+      location: insertAlumni.location ?? null,
+      skills: insertAlumni.skills ?? null,
+      email: insertAlumni.email ?? null
+    };
     this.alumni.set(id, alumni);
     return alumni;
   }
@@ -62,8 +70,11 @@ export class MemStorage implements IStorage {
   async createEvent(insertEvent: InsertEvent): Promise<Event> {
     const id = randomUUID();
     const event: Event = { 
-      ...insertEvent, 
-      id, 
+      id,
+      title: insertEvent.title,
+      description: insertEvent.description ?? null,
+      date: insertEvent.date,
+      location: insertEvent.location ?? null,
       createdAt: new Date() 
     };
     this.events.set(id, event);
@@ -102,8 +113,11 @@ export class MemStorage implements IStorage {
   async createStory(insertStory: InsertStory): Promise<Story> {
     const id = randomUUID();
     const story: Story = { 
-      ...insertStory, 
-      id, 
+      id,
+      title: insertStory.title,
+      content: insertStory.content,
+      authorName: insertStory.authorName,
+      authorGradYear: insertStory.authorGradYear ?? null,
       createdAt: new Date() 
     };
     this.stories.set(id, story);
