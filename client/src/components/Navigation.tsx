@@ -21,7 +21,7 @@ export default function Navigation() {
             <div className="flex items-center justify-center w-10 h-10 bg-primary-foreground/20 rounded-full">
               <GraduationCap className="h-6 w-6 text-primary-foreground" />
             </div>
-            <h1 className="text-xl font-bold font-serif">GEC Alumni Network</h1>
+            <h1 className="text-xl font-bold font-serif">CVR Alumni Network</h1>
           </div>
           <div className="hidden md:flex space-x-2">
             {navItems.map((item) => {
