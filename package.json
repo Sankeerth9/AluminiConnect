@@ -12,7 +12,10 @@
     "preview": "npm run build && npm start",
     "docker:build": "docker build -t alumniconnect .",
     "docker:run": "docker run -p 5000:5000 alumniconnect",
-    "deploy:check": "npm run check && npm run build"
+    "deploy:check": "npm run check && npm run build",
+    "render:build": "npm ci && npm run build",
+    "render:start": "npm start",
+    "postinstall": "npm run db:push || true"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

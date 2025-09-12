@@ -57,16 +57,14 @@ app.use((req, res, next) => {
   }
 
   // ALWAYS serve the app on the port specified in the environment variable PORT
-  // Other ports are firewalled. Default to 5000 if not specified.
+  // Render uses port 10000 by default, but can be configured
   // this serves both the API and the client.
-  // It is the only port that is not firewalled.
   const port = parseInt(process.env.PORT || '5000', 10);
   const host = process.env.NODE_ENV === 'development' ? 'localhost' : '0.0.0.0';
-  server.listen({
-    port,
-    host,
-    reusePort: process.env.NODE_ENV !== 'development',
-  }, () => {
-    log(`serving on ${host}:${port}`);
+  
+  server.listen(port, host, () => {
+    log(`🚀 AlumniConnect server running on ${host}:${port}`);
+    log(`📊 Health check: http://${host}:${port}/api/health`);
+    log(`🌐 Application: http://${host}:${port}`);
   });
 })();

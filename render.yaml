@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: alumniconnect
+    env: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        fromDatabase:
+          name: alumniconnect-db
+          property: connectionString
+      - key: SESSION_SECRET
+        generateValue: true
+    healthCheckPath: /api/health
+
+databases:
+  - name: alumniconnect-db
+    plan: free
+    databaseName: alumniconnect
+    user: alumniconnect_user
