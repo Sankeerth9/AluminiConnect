@@ -16,8 +16,8 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Remove dev dependencies to reduce image size
-RUN npm prune --production
+# Keep all dependencies for now to avoid runtime issues
+# TODO: Optimize by removing only specific dev dependencies that aren't needed at runtime
 
 # Expose port
 EXPOSE 5000
