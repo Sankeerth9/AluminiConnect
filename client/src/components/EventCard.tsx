@@ -16,7 +16,7 @@ export default function EventCard({ event, onRegister }: EventCardProps) {
   };
 
   return (
-    <Card className="hover-elevate" data-testid={`card-event-${event.id}`}>
+    <Card className="lift-shadow border border-gray-200" data-testid={`card-event-${event.id}`}>
       <CardHeader>
         <CardTitle data-testid={`text-title-${event.id}`}>{event.title}</CardTitle>
       </CardHeader>

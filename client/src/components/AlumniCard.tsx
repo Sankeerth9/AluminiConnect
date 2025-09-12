@@ -16,7 +16,7 @@ export default function AlumniCard({ alumni }: AlumniCardProps) {
     .toUpperCase();
 
   return (
-    <Card className="hover-elevate" data-testid={`card-alumni-${alumni.id}`}>
+    <Card className="lift-shadow border border-gray-200" data-testid={`card-alumni-${alumni.id}`}>
       <CardHeader className="pb-3">
         <div className="flex items-center space-x-3">
           <Avatar>

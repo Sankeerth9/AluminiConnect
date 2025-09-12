@@ -19,7 +19,7 @@ export default function StoryCard({ story }: StoryCardProps) {
     : story.content;
 
   return (
-    <Card className="hover-elevate" data-testid={`card-story-${story.id}`}>
+    <Card className="lift-shadow border border-gray-200" data-testid={`card-story-${story.id}`}>
       <CardHeader>
         <CardTitle data-testid={`text-title-${story.id}`}>{story.title}</CardTitle>
         <div className="flex items-center space-x-3">

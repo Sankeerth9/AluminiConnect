@@ -97,13 +97,14 @@ export default function AlumniDirectory() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8" data-testid="page-alumni-directory">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Alumni Directory</h1>
-        <p className="text-muted-foreground">
-          Connect with fellow graduates from our engineering community
-        </p>
-      </div>
+    <div className="min-h-screen bg-white">
+      <div className="max-w-7xl mx-auto px-4 py-8" data-testid="page-alumni-directory">
+        <div className="mb-8 text-center">
+          <h1 className="text-4xl font-bold text-foreground mb-3 font-serif">Alumni Directory</h1>
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            Connect with fellow graduates from our engineering community
+          </p>
+        </div>
 
       {/* Search and Filter Bar */}
       <div className="mb-8 space-y-4">
@@ -176,7 +177,8 @@ export default function AlumniDirectory() {
             Clear Search
           </Button>
         </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
