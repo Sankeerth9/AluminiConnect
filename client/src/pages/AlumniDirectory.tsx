@@ -7,7 +7,7 @@ import { Search, Filter } from "lucide-react";
 
 export default function AlumniDirectory() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [yearFilter, setYearFilter] = useState("");
+  const [yearFilter, setYearFilter] = useState("all");
 
   // TODO: Remove mock data - replace with API calls
   const allAlumni = [
@@ -73,7 +73,7 @@ export default function AlumniDirectory() {
                          alumni.company?.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          alumni.location?.toLowerCase().includes(searchTerm.toLowerCase());
     
-    const matchesYear = !yearFilter || alumni.graduationYear.toString() === yearFilter;
+    const matchesYear = yearFilter === "all" || alumni.graduationYear.toString() === yearFilter;
     
     return matchesSearch && matchesYear;
   });
@@ -92,7 +92,7 @@ export default function AlumniDirectory() {
 
   const clearFilters = () => {
     setSearchTerm("");
-    setYearFilter("");
+    setYearFilter("all");
     console.log("Filters cleared");
   };
 
@@ -127,7 +127,7 @@ export default function AlumniDirectory() {
                 <SelectValue placeholder="Filter by graduation year" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Years</SelectItem>
+                <SelectItem value="all">All Years</SelectItem>
                 {graduationYears.map((year) => (
                   <SelectItem key={year} value={year.toString()}>
                     Class of {year}
@@ -136,7 +136,7 @@ export default function AlumniDirectory() {
               </SelectContent>
             </Select>
             
-            {(searchTerm || yearFilter) && (
+            {(searchTerm || yearFilter !== "all") && (
               <Button 
                 variant="outline" 
                 onClick={clearFilters}
