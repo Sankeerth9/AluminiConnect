@@ -3,6 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import DonationSection from "@/components/DonationSection";
+import Forum from "@/components/Forum";
+import AlumniMap from "@/components/AlumniMap";
+import MultimediaStories from "@/components/MultimediaStories";
+import { useAuth } from "@/contexts/AuthContext";
 import { 
   Star, 
   Calendar, 
@@ -24,6 +29,7 @@ import {
 } from "lucide-react";
 
 export default function Dashboard() {
+  const { user } = useAuth();
   // Featured Alumni of the Month
   const featuredAlumnus = {
     name: "Dr. Priya Sharma",
@@ -351,7 +357,10 @@ export default function Dashboard() {
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
           
-          {/* Upcoming Events */}
+          {/* Alumni Map - Visible to all roles */}
+          <AlumniMap />
+          
+          {/* Upcoming Events - All roles can see */}
           <Card className="rounded-xl hover:shadow-lg transition-all duration-300 border-0 bg-white">
             <CardHeader className="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-t-xl">
               <CardTitle className="flex items-center gap-3">
@@ -387,7 +396,7 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
-          {/* Alumni Success Stories */}
+          {/* Alumni Success Stories - All roles can see */}
           <Card className="rounded-xl hover:shadow-lg transition-all duration-300 border-0 bg-white">
             <CardHeader className="bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-t-xl">
               <CardTitle className="flex items-center gap-3">
@@ -418,7 +427,8 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
-          {/* Job Opportunities */}
+          {/* Job Opportunities - Alumni and Students can see */}
+          {(user?.role === 'alumni' || user?.role === 'student') && (
           <Card className="rounded-xl hover:shadow-lg transition-all duration-300 border-0 bg-white">
             <CardHeader className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-t-xl">
               <CardTitle className="flex items-center gap-3">
@@ -455,8 +465,10 @@ export default function Dashboard() {
               </div>
             </CardContent>
           </Card>
+          )}
 
-          {/* Referral Opportunities */}
+          {/* Referral Opportunities - Alumni and Students can see */}
+          {(user?.role === 'alumni' || user?.role === 'student') && (
           <Card className="rounded-xl hover:shadow-lg transition-all duration-300 border-0 bg-white">
             <CardHeader className="bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-t-xl">
               <CardTitle className="flex items-center gap-3">
@@ -491,8 +503,10 @@ export default function Dashboard() {
               </div>
             </CardContent>
           </Card>
+          )}
 
-          {/* Resume Repository */}
+          {/* Resume Repository - Alumni and Students can see */}
+          {(user?.role === 'alumni' || user?.role === 'student') && (
           <Card className="rounded-xl hover:shadow-lg transition-all duration-300 border-0 bg-white">
             <CardHeader className="bg-gradient-to-r from-cyan-500 to-cyan-600 text-white rounded-t-xl">
               <CardTitle className="flex items-center gap-3">
@@ -520,8 +534,9 @@ export default function Dashboard() {
               </div>
             </CardContent>
           </Card>
+          )}
 
-          {/* Mentorship Spotlights */}
+          {/* Mentorship Spotlights - All roles can see */}
           <Card className="rounded-xl hover:shadow-lg transition-all duration-300 border-0 bg-white">
             <CardHeader className="bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-t-xl">
               <CardTitle className="flex items-center gap-3">
@@ -558,6 +573,52 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
+          {/* Donation Section - Alumni only */}
+          {user?.role === 'alumni' && <DonationSection />}
+
+          {/* Forum - Alumni and Students */}
+          {(user?.role === 'alumni' || user?.role === 'student') && <Forum />}
+
+          {/* Admin Event Management - Admin only */}
+          {user?.role === 'admin' && (
+            <Card className="rounded-xl hover:shadow-lg transition-all duration-300 border-0 bg-white">
+              <CardHeader className="bg-gradient-to-r from-red-500 to-red-600 text-white rounded-t-xl">
+                <CardTitle className="flex items-center gap-3">
+                  <div className="bg-white/20 p-2 rounded-full">
+                    <Calendar className="h-5 w-5" />
+                  </div>
+                  Event Management
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="space-y-4">
+                  <div className="bg-red-50 p-4 rounded-lg border border-red-200">
+                    <h3 className="font-semibold text-gray-800 mb-2">Quick Actions</h3>
+                    <div className="flex gap-2">
+                      <Button size="sm" className="bg-red-500 hover:bg-red-600 text-white">
+                        Add New Event
+                      </Button>
+                      <Button size="sm" variant="outline" className="text-red-600 border-red-200 hover:bg-red-50">
+                        Manage Events
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    <p>• Create and manage alumni events</p>
+                    <p>• Send event notifications</p>
+                    <p>• Track event registrations</p>
+                    <p>• Generate event reports</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+        </div>
+
+        {/* Multimedia Stories Section - Full width for better display */}
+        <div className="mt-8">
+          <MultimediaStories />
         </div>
 
         {/* Bottom Section - News and Announcements */}

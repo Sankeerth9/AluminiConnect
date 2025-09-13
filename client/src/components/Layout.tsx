@@ -1,16 +1,16 @@
 import Navigation from "./Navigation";
-import { useLocation } from "wouter";
+import { useLocation } from "react-router-dom";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const [location] = useLocation();
+  const location = useLocation();
   
   // Define background colors for different sections
   const getBackgroundClass = () => {
-    switch (location) {
+    switch (location.pathname) {
       case "/":
         return "bg-gradient-to-br from-stone-50 to-amber-50/30";
       case "/directory":
